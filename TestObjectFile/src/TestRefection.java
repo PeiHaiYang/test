@@ -1,6 +1,8 @@
 import org.junit.Test;
 
+import java.io.InputStream;
 import java.lang.reflect.*;
+import java.util.Properties;
 
 /**
  * @author PHY
@@ -83,7 +85,30 @@ public class TestRefection {
     }
 
 
-    public void test04(){
+    @Test
+    public void test04{
+        InputStream inputStream = null;
+        try {
+            Properties pro=new Properties();
+            inputStream = new FileInputStream("JDBC.properties");
+            pro.load(inputStream);
+
+            String username= pro.getProperty("username");
+            String password=pro.getProperty("password");
+            System.out.println(username);
+            System.out.println(password);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
 
     }
 }
